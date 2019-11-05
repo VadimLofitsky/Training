@@ -1,10 +1,11 @@
 package hello;
 
-import org.springframework.boot.Application;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringApplication
+@SpringBootApplication
 public class Application {
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
