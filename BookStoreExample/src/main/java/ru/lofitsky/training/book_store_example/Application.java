@@ -1,4 +1,4 @@
-package ru.lofitsky.training.BookStoreExample;
+package ru.lofitsky.training.book_store_example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
