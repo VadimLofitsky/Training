@@ -1,4 +1,4 @@
-package ru.lofitsky.training.RESTApp01.Controller;
+package ru.lofitsky.training.book_store_example.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
