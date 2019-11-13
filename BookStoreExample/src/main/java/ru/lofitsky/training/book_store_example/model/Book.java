@@ -8,8 +8,6 @@ import lombok.ToString;
 public class Book {
     private final long id;
     private final String title;
-    //    private final String[] authors;
-    //    private final int year;
     private final Genres genre;
     private final String publisher;
 }
