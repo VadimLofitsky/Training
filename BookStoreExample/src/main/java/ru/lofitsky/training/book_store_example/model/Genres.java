@@ -12,7 +12,8 @@ public enum Genres {
     ACTION_AND_ADVENTURE,
     ROMANCE,
     MYSTERY,
-    HORROR;
+    HORROR,
+    ФАНТАСТИКА;             // it also works! ));
 
     private final static Map<String, Genres> namesMap = Stream.of(Genres.values())
             .collect(Collectors.toMap(stringName -> stringName.name().toUpperCase(), enumType -> enumType));
