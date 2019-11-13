@@ -1,7 +1,11 @@
 package ru.lofitsky.training.book_store_example.controller;
 
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.lofitsky.training.book_store_example.model.Book;
+import ru.lofitsky.training.book_store_example.model.Genres;
 
 @RestController
 //TODO: think about renaming controller into smth like (Request/Response)Controller
@@ -12,12 +16,12 @@ public class GreetingController {
     }
 
     // for testing workability
-//    @RequestMapping("/book/{id}/{title}/{genre}/{publisher}")
-//    public Book greeting(@PathVariable(name="id") Integer id,
-//                         @PathVariable(name="title") String title,
-//                         @Nullable @PathVariable(name="genre") String genre,
-//                         @PathVariable(name="publisher") String publisher) {
-//
-//        return new Book(id, title, Genres.UNKNOWN, publisher);
-//    }
+    @RequestMapping("/book/{id}/{title}/{genre}/{publisher}")
+    public Book greeting(@PathVariable(name="id") Integer id,
+                         @PathVariable(name="title") String title,
+                         @PathVariable(name="genre") String genre,
+                         @PathVariable(name="publisher") String publisher) {
+
+        return new Book(id, title, Genres.getByString(genre), publisher);
+    }
 }
