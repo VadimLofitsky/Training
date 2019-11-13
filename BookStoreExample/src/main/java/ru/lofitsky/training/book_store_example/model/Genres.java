@@ -15,10 +15,10 @@ public enum Genres {
     HORROR;
 
     private final static Map<String, Genres> namesMap = Stream.of(Genres.values())
-            .collect(Collectors.toMap(Enum::name, enumType -> enumType));
+            .collect(Collectors.toMap(stringName -> stringName.name().toUpperCase(), enumType -> enumType));
 
     public static Genres getByString(String stringType) {
-        Genres result = namesMap.get(stringType);
+        Genres result = namesMap.get(stringType.toUpperCase());
         return (result != null) ? result : UNKNOWN;
     }
 }
