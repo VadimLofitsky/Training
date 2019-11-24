@@ -1,4 +1,4 @@
-package ru.lofitsky.training.book_store_example.controller;
+package ru.lofitsky.training.book_store_example.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
