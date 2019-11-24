@@ -3,21 +3,24 @@ package ru.lofitsky.training.book_store_example.model;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@ToString(includeFieldNames = true)
+@ToString
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final long id;
+    private long id;
 
     @NotBlank(message = "Title is not optional")
     private final String title;
 
-    private final Genres genre;
-    private final String publisher;
+    private Genres genre;
+    private String publisher;
 }
