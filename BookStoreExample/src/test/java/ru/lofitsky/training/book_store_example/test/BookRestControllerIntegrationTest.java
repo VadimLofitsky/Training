@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.lofitsky.training.book_store_example.Application;
 import ru.lofitsky.training.book_store_example.model.Book;
-import ru.lofitsky.training.book_store_example.repository.BookRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -22,9 +21,6 @@ class BookRestControllerIntegrationTest {
 
     @Autowired
     private MockMvc mvc;
-
-    @Autowired
-    private BookRepository bookRepository;
 
     @Test
     void givenBooks_whenGetBooks_theStatus200() throws Exception {
