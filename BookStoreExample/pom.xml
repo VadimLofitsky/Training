@@ -7,6 +7,13 @@
     <artifactId>book-store-example</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <java.version>12.0.2</java.version>
+        <postgres.version>42.2.8</postgres.version>
+        <h2database.version>1.4.200</h2database.version>
+        <lombok.version>1.18.10</lombok.version>
+    </properties>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -34,13 +41,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.8</version>
+            <version>${postgres.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
-            <version>1.4.200</version>
+            <version>${h2database.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -50,15 +57,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <properties>
-        <java.version>12.0.2</java.version>
-    </properties>
-
 
     <build>
         <plugins>
