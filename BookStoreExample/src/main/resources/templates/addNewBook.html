@@ -28,10 +28,12 @@
                     <label for="genre">Genre:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" th:field="*{genre}" id="genre" placeholder="genre">
+                    <select th:object="${genres}" id="genre">
+                        <option th:each="genre : ${genres}" th:text="${genre}" th:value="${genre}" th:selected="${genre}==${book.genre.name()}"></option>
+                    </select>
                 </td>
                 <td>
-                    <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
+                    <span th:object="${book}" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
                 </td>
             </tr>
             <tr>
