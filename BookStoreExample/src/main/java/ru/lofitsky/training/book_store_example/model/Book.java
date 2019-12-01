@@ -21,6 +21,7 @@ public class Book {
     @NotBlank(message = "Title is not optional")
     private final String title;
 
+    private String author;
     private Genres genre;
     private String publisher;
 }
