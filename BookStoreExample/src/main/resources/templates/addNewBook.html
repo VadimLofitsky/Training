@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="width: 100%" align="center">
-    <form action="#" th:action="@{/addNewBook}" th:object="${book}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <form action="#" th:action="@{/addNewBook}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
     <table cellpadding="1px" cellspacing="1px" align="center">
         <tbody>
             <tr>
@@ -17,10 +17,7 @@
                     <label for="title">Title:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" th:field="*{title}" id="title" placeholder="book title">
-                </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                    <input type="text" id="title" placeholder="book title" style="width: 100%;">
                 </td>
             </tr>
             <tr>
@@ -29,11 +26,8 @@
                 </td>
                 <td>
                     <select th:object="${genres}" id="genre">
-                        <option th:each="genre : ${genres}" th:text="${genre}" th:value="${genre}" th:selected="${genre}==${book.genre.name()}"></option>
+                        <option th:each="genre : ${genres}" th:text="${genre}" th:value="${genre}"></option>
                     </select>
-                </td>
-                <td>
-                    <span th:object="${book}" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
                 </td>
             </tr>
             <tr>
@@ -41,10 +35,7 @@
                     <label for="author">Author:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" th:field="*{author}" id="author" placeholder="author">
-                </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+                    <input type="text" id="author" placeholder="author" style="width: 100%;">
                 </td>
             </tr>
             <tr>
@@ -52,10 +43,7 @@
                     <label for="publisher">Publisher:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" th:field="*{publisher}" id="publisher" placeholder="publisher">
-                </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></span>
+                    <input type="text" id="publisher" placeholder="publisher" style="width: 100%;">
                 </td>
             </tr>
             <tr>

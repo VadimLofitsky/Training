@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 
 import java.util.Arrays;
@@ -22,10 +21,7 @@ public class BookController {
     public String addNewBook(Model model) {
         List<Genres> genres = Arrays.asList(Genres.values());
 
-        Book emptyBook = new Book();
-
         model.addAttribute("genres", genres);
-        model.addAttribute("book", emptyBook);
 
         return "addNewBook";
     }
