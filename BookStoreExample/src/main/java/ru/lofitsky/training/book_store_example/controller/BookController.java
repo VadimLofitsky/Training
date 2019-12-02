@@ -8,6 +8,7 @@ import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -19,7 +20,7 @@ public class BookController {
 
     @GetMapping("/addNewBook")
     public String addNewBook(Model model) {
-        String[] genres = Arrays.stream(Genres.values()).map(Enum::name).toArray(String[]::new);
+        List<Genres> genres = Arrays.asList(Genres.values());
 
         Book testBook = new Book("The Holy Bible");
         testBook.setAuthor("Lord");
