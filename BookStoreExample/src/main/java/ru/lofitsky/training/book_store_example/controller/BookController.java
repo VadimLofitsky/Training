@@ -22,13 +22,10 @@ public class BookController {
     public String addNewBook(Model model) {
         List<Genres> genres = Arrays.asList(Genres.values());
 
-        Book testBook = new Book("The Holy Bible");
-        testBook.setAuthor("Lord");
-        testBook.setGenre(Genres.MYSTERY);
-        testBook.setPublisher("the Time");
+        Book emptyBook = new Book();
 
         model.addAttribute("genres", genres);
-        model.addAttribute("book", testBook);
+        model.addAttribute("book", emptyBook);
 
         return "addNewBook";
     }

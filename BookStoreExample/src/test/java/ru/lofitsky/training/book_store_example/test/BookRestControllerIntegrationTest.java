@@ -24,7 +24,6 @@ class BookRestControllerIntegrationTest {
 
     @Test
     void givenBooks_whenGetBooks_theStatus200() throws Exception {
-
         Book testBook = new Book("The Holy Bible");
 
         mvc.perform(get("/")
