@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="width: 100%" align="center">
-    <form action="#" th:action="@{/addNewBook}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <form action="#" th:action="@{/saveBook}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
     <table cellpadding="1px" cellspacing="1px" align="center">
         <tbody>
             <tr>
@@ -17,7 +17,7 @@
                     <label for="title">Title:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" id="title" placeholder="book title" style="width: 100%;">
+                    <input type="text" id="title" th:name="title" placeholder="book title" style="width: 100%;">
                 </td>
             </tr>
             <tr>
@@ -25,7 +25,7 @@
                     <label for="genre">Genre:&nbsp;</label>
                 </td>
                 <td>
-                    <select th:object="${genres}" id="genre">
+                    <select th:object="${genres}" id="genre" th:name="genre">
                         <option th:each="genre : ${genres}" th:text="${genre}" th:value="${genre}"></option>
                     </select>
                 </td>
@@ -35,7 +35,7 @@
                     <label for="author">Author:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" id="author" placeholder="author" style="width: 100%;">
+                    <input type="text" id="author" th:name="author" placeholder="author" style="width: 100%;">
                 </td>
             </tr>
             <tr>
@@ -43,7 +43,7 @@
                     <label for="publisher">Publisher:&nbsp;</label>
                 </td>
                 <td>
-                    <input type="text" id="publisher" placeholder="publisher" style="width: 100%;">
+                    <input type="text" id="publisher" th:name="publisher" placeholder="publisher" style="width: 100%;">
                 </td>
             </tr>
             <tr>
