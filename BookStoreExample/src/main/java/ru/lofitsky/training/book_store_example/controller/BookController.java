@@ -20,11 +20,6 @@ public class BookController {
     BookRepository bookRepository;
 
     @GetMapping("/")
-    public String greeting() {
-        return "redirect:/index";
-    }
-
-    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("books", bookRepository.findAll());
         return "index";
@@ -52,6 +47,6 @@ public class BookController {
 
         bookRepository.save(gottenBook);
         model.addAttribute("books", bookRepository.findAll());
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
