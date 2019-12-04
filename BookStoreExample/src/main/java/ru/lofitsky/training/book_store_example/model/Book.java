@@ -1,5 +1,6 @@
 package ru.lofitsky.training.book_store_example.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Book {
 
@@ -24,8 +26,4 @@ public class Book {
     private String author;
     private Genres genre;
     private String publisher;
-
-//    public Book(String title) {
-//        this.title = title;
-//    }
 }
