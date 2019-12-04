@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new book...</title>
+</head>
+<body>
+<div style="width: 100%" align="center">
+    <form action="#" th:action="@{/saveBook}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <table cellpadding="1px" cellspacing="1px" align="center">
+        <tbody>
+            <tr>
+                <td colspan="3" align="center"><h2>Add new book</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="title">Title:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text" id="title" th:name="title" placeholder="book title" style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="genre">Genre:&nbsp;</label>
+                </td>
+                <td>
+                    <select th:object="${genres}" id="genre" th:name="genre">
+                        <option th:each="genre : ${genres}" th:text="${genre}" th:value="${genre}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="author">Author:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text" id="author" th:name="author" placeholder="author" style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="publisher">Publisher:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text" id="publisher" th:name="publisher" placeholder="publisher" style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <input type="submit" value="Save" style="width: 75%;">
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+</body>
+</html>

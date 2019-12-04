@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stored books</title>
+</head>
+<body>
+<div style="width: 100%" align="center">
+    <table cellpadding="1px" cellspacing="1px" align="center" border="1px" style="width: 50%">
+        <tbody>
+            <tr>
+                <td colspan="5" align="center"><h2>Stored books</h2></td>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id} + '.'"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.genre}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

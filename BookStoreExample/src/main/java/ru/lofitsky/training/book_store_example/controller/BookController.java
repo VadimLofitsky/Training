@@ -1,12 +1,53 @@
 package ru.lofitsky.training.book_store_example.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.lofitsky.training.book_store_example.model.Book;
+import ru.lofitsky.training.book_store_example.model.Genres;
+import ru.lofitsky.training.book_store_example.repository.BookRepository;
 
-@RestController
+import java.util.Arrays;
+import java.util.List;
+
+@Controller
 public class BookController {
-    @RequestMapping("/")
-    public String greeting() {
-        return "Hello, world!";
+
+    @Autowired
+    BookRepository bookRepository;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("books", bookRepository.findAll());
+        return "index";
+    }
+
+    @GetMapping("/addNewBook")
+    public String addNewBook(Model model) {
+        List<Genres> genres = Arrays.asList(Genres.values());
+        model.addAttribute("genres", genres);
+        return "addNewBook";
+    }
+
+    @PostMapping("/saveBook")
+    public String saveBook(@RequestParam String title,
+                           @RequestParam String genre,
+                           @RequestParam String author,
+                           @RequestParam String publisher,
+                           Model model) {
+
+        Book gottenBook = Book.builder()
+                .title(title)
+                .genre(Genres.getByString(genre))
+                .author(author)
+                .publisher(publisher)
+                .build();
+
+        bookRepository.save(gottenBook);
+        model.addAttribute("books", bookRepository.findAll());
+        return "redirect:/";
     }
 }
