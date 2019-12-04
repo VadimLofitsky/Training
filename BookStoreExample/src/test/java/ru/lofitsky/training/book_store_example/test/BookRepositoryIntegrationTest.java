@@ -21,7 +21,8 @@ public class BookRepositoryIntegrationTest {
     @Test
     public void whenFindByTitle_thenReturnBook() {
         // given
-        Book testBook = new Book("The Holy Bible");
+        Book testBook = new Book();
+        testBook.setTitle("The Holy Bible");
         entityManager.persist(testBook);
         entityManager.flush();
 

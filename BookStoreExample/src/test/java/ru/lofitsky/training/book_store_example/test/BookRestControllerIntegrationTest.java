@@ -24,13 +24,13 @@ class BookRestControllerIntegrationTest {
 
     @Test
     void givenBooks_whenGetBooks_theStatus200() throws Exception {
-        Book testBook = new Book("The Holy Bible");
+        Book testBook = new Book();
+        testBook.setTitle("The Holy Bible");
 
         mvc.perform(get("/")
-                .contentType(MediaType.TEXT_PLAIN_VALUE))
+                .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(content()
-                        .contentTypeCompatibleWith(MediaType.TEXT_PLAIN))
-                .andExpect(content().string("Hello, world!"));
+                        .contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 }
