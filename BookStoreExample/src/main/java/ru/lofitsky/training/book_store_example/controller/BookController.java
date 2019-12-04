@@ -39,11 +39,18 @@ public class BookController {
                          @RequestParam String publisher,
                            Model model) {
 
-        Book gottenBook = new Book();
-        gottenBook.setTitle(title);
-        gottenBook.setGenre(Genres.getByString(genre));
-        gottenBook.setAuthor(author);
-        gottenBook.setPublisher(publisher);
+//        Book gottenBook = new Book();
+//        gottenBook.setTitle(title);
+//        gottenBook.setGenre(Genres.getByString(genre));
+//        gottenBook.setAuthor(author);
+//        gottenBook.setPublisher(publisher);
+
+        Book gottenBook = Book.builder()
+        			.setTitle(title)
+        			.setGenre(Genres.getByString(genre))
+        			.setAuthor(author)
+        			.setPublisher(publisher)
+                    .build();
 
         bookRepository.save(gottenBook);
         model.addAttribute("books", bookRepository.findAll());
