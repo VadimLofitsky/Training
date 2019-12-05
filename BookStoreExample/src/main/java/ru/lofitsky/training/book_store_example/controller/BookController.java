@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
-import ru.lofitsky.training.book_store_example.repository.BookRepository;
+import ru.lofitsky.training.book_store_example.service.BookService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,11 +17,11 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    BookRepository bookRepository;
+    BookService bookService;
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("books", bookRepository.findAll());
+        model.addAttribute("books", bookService.getAllBooks());
         return "index";
     }
 
@@ -46,8 +46,8 @@ public class BookController {
                 .publisher(publisher)
                 .build();
 
-        bookRepository.save(gottenBook);
-        model.addAttribute("books", bookRepository.findAll());
+        bookService.saveBook(gottenBook);
+        model.addAttribute("books", bookService.getAllBooks());
         return "redirect:/";
     }
 }
