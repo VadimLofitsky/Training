@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -24,6 +21,9 @@ public class Book {
     private String title;
 
     private String author;
+
+    @Enumerated(EnumType.STRING)
     private Genres genre;
+
     private String publisher;
 }
