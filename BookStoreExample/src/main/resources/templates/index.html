@@ -11,7 +11,7 @@
             <tr>
                 <td colspan="5" align="center"><h2>Stored books</h2></td>
             </tr>
-            <tr th:each="book : ${books}">
+            <tr th:each="book : ${bookpage.content}">
                 <td th:text="${book.id} + '.'"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.genre}"></td>
