@@ -18,7 +18,9 @@
             <td colspan="6" style="text-align: center;">
                 <a th:href="@{/(page=${bookpage.number - 1})}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">&lt;-&nbsp;Prev</a>
+                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                </a>
 
                 <th:block th:each="number : ${pagenumbers}">
                     <a th:attrappend="href=${number!=bookpage.number+1}?@{/(page=${number - 1})}"
@@ -29,7 +31,9 @@
 
                 <a th:href="@{/(page=${bookpage.number + 1})}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasNext()}?'hidden'">Next&nbsp;-&gt;</a>
+                   th:classappend="${!bookpage.hasNext()}?'hidden'">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
             </td>
         </tr>
         <tr style="text-align: center; font-size: larger; background-color: lightgray;">
