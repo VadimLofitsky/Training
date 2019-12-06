@@ -12,10 +12,10 @@
     <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
         <tbody>
         <tr>
-            <td colspan="5" align="center"><h2>Stored books</h2></td>
+            <td colspan="6" align="center"><h2><i class="fas fa-book"></i>&nbsp;Stored books</h2></td>
         </tr>
         <tr>
-            <td colspan="5" style="text-align: center;">
+            <td colspan="6" style="text-align: center;">
                 <a th:href="@{/(page=${bookpage.number - 1})}"
                    class="pagenumber prevnext"
                    th:classappend="${!bookpage.hasPrevious()}?'hidden'">&lt;-&nbsp;Prev</a>
@@ -34,13 +34,15 @@
         </tr>
         <tr style="text-align: center; font-size: larger; background-color: lightgray;">
             <td></td>
+            <td></td>
             <td><b>Title</b></td>
             <td><b>Genre</b></td>
             <td><b>Author</b></td>
             <td><b>Publisher</b></td>
         </tr>
             <tr th:each="book : ${bookpage.content}">
-                <td th:text="${book.id} + '.'"></td>
+                <td align="center"><a class="edit fas fa-edit"></a></td>
+                <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.genre}"></td>
                 <td th:text="${book.author}"></td>
