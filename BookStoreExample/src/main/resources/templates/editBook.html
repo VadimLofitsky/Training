@@ -18,11 +18,12 @@
                 <td>
                     <label>ID:&nbsp;</label>
                 </td>
-                <td>
+                <td align="left">
                     <input type="text"
                            id="id"
                            th:name="id"
-                           th:value="${book.id}">
+                           th:value="${book.id}" style="visibility: hidden; width: 0;">
+                    <span th:text="${book.id}"></span>
                 </td>
             </tr>
             <tr>

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new book...</title>
+
+    <link rel="stylesheet" href="css/addNewBook.css">
 </head>
 <body>
 <div style="width: 100%" align="center">
-    <form action="#" th:action="@{/saveBook(id=-1)}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <form id="editForm" action="#" th:action="@{/saveBook(id=-1)}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
     <table cellpadding="1px" cellspacing="1px" align="center">
         <tbody>
             <tr>
@@ -51,7 +53,17 @@
             </tr>
             <tr>
                 <td colspan="3" align="center">
-                    <input type="submit" value="Save" style="width: 75%;">
+                    <input type="submit" value="Save"
+                           class="action-button" />
+
+                    <input type="reset" value="Reset"
+                           class="action-button" />
+
+                    <input type="submit" value="Cancel"
+                           form="editForm"
+                           th:formaction="@{/}"
+                           th:formmethod="get"
+                           class="action-button" />
                 </td>
             </tr>
             <tr>
