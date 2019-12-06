@@ -1,0 +1,71 @@
+body {
+    font-family: 'Verdana';
+}
+
+a {
+    text-decoration: none;
+}
+
+#booktablecontainer {
+    width: 100%;
+    alignment: center;
+}
+
+#booktable {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0 25% 0 25%;
+}
+
+.fas.fa-book {
+    color: inherit;
+}
+
+.fas.fa-book:hover {
+    color: blue;
+}
+
+.pagenumber {
+    color: darkslategrey;
+    background-color: lightgray;
+    font-style: italic;
+    border: solid thin gray;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.pagenumber.prevnext {
+    color: inherit;
+}
+
+.pagenumber.prevnext:hover {
+    color: blue;
+}
+
+.pagenumber.prevnext.hidden {
+    visibility: hidden;
+}
+
+.pagenumber.current {
+    font-size: large;
+    font-weight: bold;
+    color: blue;
+}
+
+.pagenumber:hover {
+    color: blue;
+    /*background-color: gray;*/
+}
+
+.edit {
+    color: inherit;
+}
+
+.edit:hover {
+    color: blue;
+    cursor: pointer;
+}

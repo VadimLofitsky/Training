@@ -4,51 +4,12 @@
     <meta charset="UTF-8">
     <title>Stored books</title>
 
-    <style>
-        body {
-            font-family: 'Verdana';
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .pagenumber {
-            color: darkslategrey;
-            background-color: lightgray;
-            font-style: italic;
-            border: solid thin gray;
-            border-radius: 5px;
-            cursor: pointer;
-            padding-left: 15px;
-            padding-right: 15px;
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        .pagenumber.prevnext {
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        .pagenumber.prevnext.hidden {
-            visibility: hidden;
-        }
-
-        .pagenumber.current {
-            font-size: large;
-            font-weight: bold;
-        }
-
-        .pagenumber:hover {
-            color: lightgray;
-            background-color: gray;
-        }
-    </style>
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-<div style="width: 100%" align="center">
-    <table cellpadding="1px" cellspacing="1px" align="center" border="1px" style="width: 50%">
+<div id="booktablecontainer">
+    <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
         <tbody>
         <tr>
             <td colspan="5" align="center"><h2>Stored books</h2></td>
