@@ -16,6 +16,7 @@ import ru.lofitsky.training.book_store_example.service.BookService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Controller
 public class BookController {
@@ -27,10 +28,18 @@ public class BookController {
     public String index(Model model,
                         @PageableDefault(sort = "id",
                                          direction = Sort.Direction.ASC,
-                                         size = 3) Pageable pageable) {
+                                         size = 2) Pageable pageable) {
 
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("bookpage", page);
+
+        int totalPages = page.getTotalPages();
+        int[] pageNumbers = {};
+        if(totalPages != 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages).toArray();
+        }
+
+        model.addAttribute("pagenumbers", pageNumbers);
         return "index";
     }
 

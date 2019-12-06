@@ -1,16 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Stored books</title>
+
+    <style>
+        body {
+            font-family: 'Verdana';
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .pagenumber {
+            color: darkslategrey;
+            background-color: lightgray;
+            font-style: italic;
+            border: solid thin gray;
+            border-radius: 5px;
+            cursor: pointer;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .pagenumber.prevnext {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .pagenumber.prevnext.hidden {
+            visibility: hidden;
+        }
+
+        .pagenumber.current {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .pagenumber:hover {
+            color: lightgray;
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
 <div style="width: 100%" align="center">
     <table cellpadding="1px" cellspacing="1px" align="center" border="1px" style="width: 50%">
         <tbody>
-            <tr>
-                <td colspan="5" align="center"><h2>Stored books</h2></td>
-            </tr>
+        <tr>
+            <td colspan="5" align="center"><h2>Stored books</h2></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center;">
+                <a th:href="@{/(page=${bookpage.number - 1})}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">&lt;-&nbsp;Prev</a>
+
+                <th:block th:each="number : ${pagenumbers}">
+                    <a th:attrappend="href=${number!=bookpage.number+1}?@{/(page=${number - 1})}"
+                       th:text="${number}"
+                       class="pagenumber"
+                       th:classappend="${number==bookpage.number+1}?'current'"></a>
+                </th:block>
+
+                <a th:href="@{/(page=${bookpage.number + 1})}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!bookpage.hasNext()}?'hidden'">Next&nbsp;-&gt;</a>
+            </td>
+        </tr>
+        <tr style="text-align: center; font-size: larger; background-color: lightgray;">
+            <td></td>
+            <td><b>Title</b></td>
+            <td><b>Genre</b></td>
+            <td><b>Author</b></td>
+            <td><b>Publisher</b></td>
+        </tr>
             <tr th:each="book : ${bookpage.content}">
                 <td th:text="${book.id} + '.'"></td>
                 <td th:text="${book.title}"></td>
