@@ -17,11 +17,11 @@ a {
     margin: 0 25% 0 25%;
 }
 
-.fas.fa-book {
+.fas.fa-book-open {
     color: inherit;
 }
 
-.fas.fa-book:hover {
+.fas.fa-book-open:hover {
     color: blue;
 }
 
