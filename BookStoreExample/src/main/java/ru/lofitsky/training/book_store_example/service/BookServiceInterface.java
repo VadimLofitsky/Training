@@ -14,8 +14,8 @@ public interface BookServiceInterface {
     List<Book> getAllBooks();
 
     void saveBook(Book book);
+    void updateBook(Book book);
     void deleteBook(Long id);
-
 
     // Pageables
     Page<Book> getAllBooks(Pageable pageable);

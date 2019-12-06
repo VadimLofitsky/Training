@@ -20,9 +20,17 @@ a {
 .fas.fa-book-open {
     color: inherit;
 }
-
 .fas.fa-book-open:hover {
     color: blue;
+}
+
+i.fas.fa-book-medical.fa-2x {
+    color: black;
+    opacity: .1;
+}
+i.fas.fa-book-medical.fa-2x:hover {
+    color: blue;
+    opacity: 1;
 }
 
 .pagenumber {

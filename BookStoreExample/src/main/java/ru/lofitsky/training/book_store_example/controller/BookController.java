@@ -16,6 +16,7 @@ import ru.lofitsky.training.book_store_example.service.BookService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Controller
@@ -24,11 +25,18 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    static List<Genres> genres = Arrays.asList(Genres.values());
+
+    int lastSeeingPageNumber = 0;
+
     @GetMapping("/")
     public String index(Model model,
                         @PageableDefault(sort = "id",
                                          direction = Sort.Direction.ASC,
-                                         size = 2) Pageable pageable) {
+                                         size = 10) Pageable pageable) {
+
+        lastSeeingPageNumber = pageable.getPageNumber();
+        pageable.first();
 
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("bookpage", page);
@@ -45,27 +53,50 @@ public class BookController {
 
     @GetMapping("/addNewBook")
     public String addNewBook(Model model) {
-        List<Genres> genres = Arrays.asList(Genres.values());
         model.addAttribute("genres", genres);
+
         return "addNewBook";
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(@RequestParam String title,
+    public String saveBook(@RequestParam Long id,
+                           @RequestParam String title,
                            @RequestParam String genre,
                            @RequestParam String author,
                            @RequestParam String publisher,
                            Model model) {
 
-        Book gottenBook = Book.builder()
+        Book editedBook = Book.builder()
                 .title(title)
                 .genre(Genres.getByString(genre))
                 .author(author)
                 .publisher(publisher)
                 .build();
 
-        bookService.saveBook(gottenBook);
+        Optional<Long> optID = Optional.of(id);
+        if(optID.isPresent() && optID.get() != -1) {
+            editedBook.setId(optID.get());
+        }
+
+        bookService.saveBook(editedBook);
+
         model.addAttribute("books", bookService.getAllBooks());
-        return "redirect:/";
+
+        return "redirect:/?page=" + lastSeeingPageNumber;
+    }
+
+    @GetMapping("/editBook")
+    public String editBook(@RequestParam Long id, Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        model.addAttribute("genres", genres);
+
+        return "/editBook";
+    }
+
+    @PostMapping("/deleteBook")
+    public String deleteBook(@RequestParam Long id) {
+        bookService.deleteBook(id);
+
+        return "redirect:/?page=" + lastSeeingPageNumber;
     }
 }
