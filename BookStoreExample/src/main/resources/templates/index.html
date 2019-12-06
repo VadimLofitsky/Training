@@ -1,18 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Stored books</title>
+
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-<div style="width: 100%" align="center">
-    <table cellpadding="1px" cellspacing="1px" align="center" border="1px" style="width: 50%">
+<div id="booktablecontainer">
+    <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
         <tbody>
-            <tr>
-                <td colspan="5" align="center"><h2>Stored books</h2></td>
-            </tr>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.id} + '.'"></td>
+        <tr>
+            <td colspan="6" align="center"><h2><i class="fas fa-book-open"></i>&nbsp;Stored books</h2>
+                <br><a th:href="@{/addNewBook}" alt="Add new book..."><i class="fas fa-book-medical fa-2x"></i></a>
+                <br><br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align: center;">
+                <!-- The 'Previous page' button -->
+                <a th:href="@{/(page=${bookpage.number - 1})}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                </a>
+
+                <!-- Numbers of pages -->
+                <th:block th:each="number : ${pagenumbers}">
+                    <a th:attrappend="href=${number!=bookpage.number+1}?@{/(page=${number - 1})}"
+                       th:text="${number}"
+                       class="pagenumber"
+                       th:classappend="${number==bookpage.number+1}?'current'"></a>
+                </th:block>
+
+                <!-- The 'Next page' button -->
+                <a th:href="@{/(page=${bookpage.number + 1})}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!bookpage.hasNext()}?'hidden'">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
+            </td>
+        </tr>
+        <tr style="text-align: center; font-size: larger; background-color: lightgray;">
+            <td></td>
+            <td>ID</td>
+            <td><b>Title</b></td>
+            <td><b>Genre</b></td>
+            <td><b>Author</b></td>
+            <td><b>Publisher</b></td>
+        </tr>
+            <tr th:each="book : ${bookpage.content}">
+                <td align="center"><a th:href="@{/editBook(id=${book.id})}" class="edit fas fa-edit"></a></td>
+                <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.genre}"></td>
                 <td th:text="${book.author}"></td>
