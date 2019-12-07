@@ -12,7 +12,9 @@
     <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
         <tbody>
         <tr>
+            <!-- Head of the table... -->
             <td colspan="6" align="center"><h2><i class="fas fa-book-open"></i>&nbsp;Stored books</h2>
+                <!-- ...and the button for creating new book -->
                 <br><a th:href="@{/addNewBook}" alt="Add new book..."><i class="fas fa-book-medical fa-2x"></i></a>
                 <br><br>
             </td>
@@ -42,6 +44,7 @@
                 </a>
             </td>
         </tr>
+        <!-- Columns names -->
         <tr style="text-align: center; font-size: larger; background-color: lightgray;">
             <td></td>
             <td>ID</td>
@@ -50,6 +53,7 @@
             <td><b>Author</b></td>
             <td><b>Publisher</b></td>
         </tr>
+            <!-- List of books on the page -->
             <tr th:each="book : ${books}">
                 <td align="center"><a th:href="@{/editBook(id=${book.id})}" class="edit fas fa-edit"></a></td>
                 <td th:text="${book.id} + '.'" align="right"></td>

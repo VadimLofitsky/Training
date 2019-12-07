@@ -37,9 +37,11 @@ public class BookController {
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
 
+        // Collection of books at this page
         List<Book> books = page.getContent();
         model.addAttribute("books", books);
 
+        // Generating page numbers list
         int totalPages = page.getTotalPages();
         List<Integer> pageNumbers = Collections.emptyList();
 
@@ -51,6 +53,7 @@ public class BookController {
 
         model.addAttribute("pagenumbers", pageNumbers);
 
+        // Generating URLs for 'Prev' and 'Next' buttons
         String prevPageURL = page.hasPrevious() ? "/?page=" + (pageable.getPageNumber() - 1) : "";
         String nextPageURL = page.hasNext() ? "/?page=" + (pageable.getPageNumber() + 1) : "";
         model.addAttribute("prevPageURL", prevPageURL);
