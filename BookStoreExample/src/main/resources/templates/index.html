@@ -20,24 +20,24 @@
         <tr>
             <td colspan="6" style="text-align: center;">
                 <!-- The 'Previous page' button -->
-                <a th:href="@{/(page=${bookpage.number - 1})}"
+                <a th:href="@{/(page=${page.number - 1})}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">
+                   th:classappend="${!page.hasPrevious()}?'hidden'">
                     <i class="far fa-arrow-alt-circle-left"></i>
                 </a>
 
                 <!-- Numbers of pages -->
                 <th:block th:each="number : ${pagenumbers}">
-                    <a th:attrappend="href=${number!=bookpage.number+1}?@{/(page=${number - 1})}"
+                    <a th:attrappend="href=${number!=page.number+1}?@{/(page=${number - 1})}"
                        th:text="${number}"
                        class="pagenumber"
-                       th:classappend="${number==bookpage.number+1}?'current'"></a>
+                       th:classappend="${number==page.number+1}?'current'"></a>
                 </th:block>
 
                 <!-- The 'Next page' button -->
-                <a th:href="@{/(page=${bookpage.number + 1})}"
+                <a th:href="@{/(page=${page.number + 1})}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasNext()}?'hidden'">
+                   th:classappend="${!page.hasNext()}?'hidden'">
                     <i class="far fa-arrow-alt-circle-right"></i>
                 </a>
             </td>
@@ -50,7 +50,7 @@
             <td><b>Author</b></td>
             <td><b>Publisher</b></td>
         </tr>
-            <tr th:each="book : ${bookpage.content}">
+            <tr th:each="book : ${page.content}">
                 <td align="center"><a th:href="@{/editBook(id=${book.id})}" class="edit fas fa-edit"></a></td>
                 <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>

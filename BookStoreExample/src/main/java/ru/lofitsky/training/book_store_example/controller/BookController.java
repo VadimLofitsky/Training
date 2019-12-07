@@ -14,8 +14,8 @@ import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     int lastSeeingPageNumber = 0;
 
@@ -33,15 +33,17 @@ public class BookController {
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
 
         lastSeeingPageNumber = pageable.getPageNumber();
-        pageable.first();
 
         Page<Book> page = bookService.getAllBooks(pageable);
-        model.addAttribute("bookpage", page);
+        model.addAttribute("page", page);
 
         int totalPages = page.getTotalPages();
-        int[] pageNumbers = {};
-        if(totalPages != 0) {
-            pageNumbers = IntStream.rangeClosed(1, totalPages).toArray();
+        List<Integer> pageNumbers = Collections.emptyList();
+
+        if(totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                                   .boxed()
+                                   .collect(Collectors.toList());
         }
 
         model.addAttribute("pagenumbers", pageNumbers);
@@ -71,9 +73,8 @@ public class BookController {
                 .publisher(publisher)
                 .build();
 
-        Optional<Long> optID = Optional.of(id);
-        if(optID.isPresent() && optID.get() != -1) {
-            editedBook.setId(optID.get());
+        if(id != -1) {
+            editedBook.setId(id);
         }
 
         bookService.saveBook(editedBook);
