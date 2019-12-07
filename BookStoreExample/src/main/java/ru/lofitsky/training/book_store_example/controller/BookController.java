@@ -37,6 +37,9 @@ public class BookController {
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
 
+        List<Book> books = bookService.getAllBooks(pageable).getContent();
+        model.addAttribute("books", books);
+
         int totalPages = page.getTotalPages();
         List<Integer> pageNumbers = Collections.emptyList();
 

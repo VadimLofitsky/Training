@@ -50,7 +50,7 @@
             <td><b>Author</b></td>
             <td><b>Publisher</b></td>
         </tr>
-            <tr th:each="book : ${page.content}">
+            <tr th:each="book : ${books}">
                 <td align="center"><a th:href="@{/editBook(id=${book.id})}" class="edit fas fa-edit"></a></td>
                 <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>
