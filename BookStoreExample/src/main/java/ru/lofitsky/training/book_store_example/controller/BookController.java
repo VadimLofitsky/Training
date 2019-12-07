@@ -26,13 +26,9 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    int lastSeeingPageNumber = 0;
-
     @GetMapping("/")
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
-
-        lastSeeingPageNumber = pageable.getPageNumber();
 
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
@@ -93,7 +89,7 @@ public class BookController {
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "redirect:/?page=" + lastSeeingPageNumber;
+        return "redirect:/";
     }
 
     @GetMapping("/editBook")
@@ -110,6 +106,6 @@ public class BookController {
     public String deleteBook(@RequestParam Long id) {
         bookService.deleteBook(id);
 
-        return "redirect:/?page=" + lastSeeingPageNumber;
+        return "redirect:/";
     }
 }
