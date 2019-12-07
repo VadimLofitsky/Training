@@ -31,9 +31,7 @@ public class BookController {
 
     @GetMapping("/")
     public String index(Model model,
-                        @PageableDefault(sort = "id",
-                                         direction = Sort.Direction.ASC,
-                                         size = 10) Pageable pageable) {
+           @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
 
         lastSeeingPageNumber = pageable.getPageNumber();
         pageable.first();
