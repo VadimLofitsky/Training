@@ -20,25 +20,25 @@
         <tr>
             <td colspan="6" style="text-align: center;">
                 <!-- The 'Previous page' button -->
-                <a th:href="@{/(page=${page.number - 1})}"
+                <a th:href="${prevPageURL}"
                    class="pagenumber prevnext"
                    th:classappend="${!page.hasPrevious()}?'hidden'">
-                    <i class="far fa-arrow-alt-circle-left"></i>
+                        <i class="far fa-arrow-alt-circle-left"></i>
                 </a>
 
                 <!-- Numbers of pages -->
                 <th:block th:each="number : ${pagenumbers}">
-                    <a th:attrappend="href=${number!=page.number+1}?@{/(page=${number - 1})}"
+                    <a th:href="${number != page.number+1} ? @{/(page=${number - 1})}"
                        th:text="${number}"
                        class="pagenumber"
                        th:classappend="${number==page.number+1}?'current'"></a>
                 </th:block>
 
                 <!-- The 'Next page' button -->
-                <a th:href="@{/(page=${page.number + 1})}"
+                <a th:href="${nextPageURL}"
                    class="pagenumber prevnext"
                    th:classappend="${!page.hasNext()}?'hidden'">
-                    <i class="far fa-arrow-alt-circle-right"></i>
+                        <i class="far fa-arrow-alt-circle-right"></i>
                 </a>
             </td>
         </tr>

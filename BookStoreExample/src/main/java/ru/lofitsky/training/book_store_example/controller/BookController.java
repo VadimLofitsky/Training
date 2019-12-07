@@ -37,7 +37,7 @@ public class BookController {
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
 
-        List<Book> books = bookService.getAllBooks(pageable).getContent();
+        List<Book> books = page.getContent();
         model.addAttribute("books", books);
 
         int totalPages = page.getTotalPages();
@@ -50,6 +50,12 @@ public class BookController {
         }
 
         model.addAttribute("pagenumbers", pageNumbers);
+
+        String prevPageURL = page.hasPrevious() ? "/?page=" + (pageable.getPageNumber() - 1) : "";
+        String nextPageURL = page.hasNext() ? "/?page=" + (pageable.getPageNumber() + 1) : "";
+        model.addAttribute("prevPageURL", prevPageURL);
+        model.addAttribute("nextPageURL", nextPageURL);
+
         return "index";
     }
 
