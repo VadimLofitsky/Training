@@ -14,18 +14,17 @@ import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Controller
 public class BookController {
 
     @Autowired
     BookService bookService;
-
-    static List<Genres> genres = Arrays.asList(Genres.values());
 
     int lastSeeingPageNumber = 0;
 
@@ -51,6 +50,7 @@ public class BookController {
 
     @GetMapping("/addNewBook")
     public String addNewBook(Model model) {
+        List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
         return "addNewBook";
@@ -85,6 +85,8 @@ public class BookController {
 
     @GetMapping("/editBook")
     public String editBook(@RequestParam Long id, Model model) {
+        List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
+
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
