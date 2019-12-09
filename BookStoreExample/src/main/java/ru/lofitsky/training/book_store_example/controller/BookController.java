@@ -14,43 +14,53 @@ import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Controller
 public class BookController {
 
     @Autowired
-    BookService bookService;
-
-    static List<Genres> genres = Arrays.asList(Genres.values());
-
-    int lastSeeingPageNumber = 0;
+    private BookService bookService;
 
     @GetMapping("/")
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
 
-        lastSeeingPageNumber = pageable.getPageNumber();
-        pageable.first();
-
         Page<Book> page = bookService.getAllBooks(pageable);
-        model.addAttribute("bookpage", page);
+        model.addAttribute("page", page);
 
+        // Collection of books at this page
+        List<Book> books = page.getContent();
+        model.addAttribute("books", books);
+
+        // Generating page numbers list
         int totalPages = page.getTotalPages();
-        int[] pageNumbers = {};
-        if(totalPages != 0) {
-            pageNumbers = IntStream.rangeClosed(1, totalPages).toArray();
+        List<Integer> pageNumbers = Collections.emptyList();
+
+        if(totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                                   .boxed()
+                                   .collect(Collectors.toList());
         }
 
         model.addAttribute("pagenumbers", pageNumbers);
+
+        // Generating URLs for 'Prev' and 'Next' buttons
+        String prevPageURL = page.hasPrevious() ? "/?page=" + (pageable.getPageNumber() - 1) : "";
+        String nextPageURL = page.hasNext() ? "/?page=" + (pageable.getPageNumber() + 1) : "";
+        model.addAttribute("prevPageURL", prevPageURL);
+        model.addAttribute("nextPageURL", nextPageURL);
+
         return "index";
     }
 
     @GetMapping("/addNewBook")
     public String addNewBook(Model model) {
+        List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
         return "addNewBook";
@@ -71,20 +81,21 @@ public class BookController {
                 .publisher(publisher)
                 .build();
 
-        Optional<Long> optID = Optional.of(id);
-        if(optID.isPresent() && optID.get() != -1) {
-            editedBook.setId(optID.get());
+        if(id != -1) {
+            editedBook.setId(id);
         }
 
         bookService.saveBook(editedBook);
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "redirect:/?page=" + lastSeeingPageNumber;
+        return "redirect:/";
     }
 
     @GetMapping("/editBook")
     public String editBook(@RequestParam Long id, Model model) {
+        List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
+
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
@@ -95,6 +106,6 @@ public class BookController {
     public String deleteBook(@RequestParam Long id) {
         bookService.deleteBook(id);
 
-        return "redirect:/?page=" + lastSeeingPageNumber;
+        return "redirect:/";
     }
 }

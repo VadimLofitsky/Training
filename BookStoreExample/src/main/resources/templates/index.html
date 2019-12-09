@@ -12,7 +12,9 @@
     <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
         <tbody>
         <tr>
+            <!-- Head of the table... -->
             <td colspan="6" align="center"><h2><i class="fas fa-book-open"></i>&nbsp;Stored books</h2>
+                <!-- ...and the button for creating new book -->
                 <br><a th:href="@{/addNewBook}" alt="Add new book..."><i class="fas fa-book-medical fa-2x"></i></a>
                 <br><br>
             </td>
@@ -20,28 +22,29 @@
         <tr>
             <td colspan="6" style="text-align: center;">
                 <!-- The 'Previous page' button -->
-                <a th:href="@{/(page=${bookpage.number - 1})}"
+                <a th:href="${prevPageURL}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasPrevious()}?'hidden'">
-                    <i class="far fa-arrow-alt-circle-left"></i>
+                   th:classappend="${!page.hasPrevious()}?'hidden'">
+                        <i class="far fa-arrow-alt-circle-left"></i>
                 </a>
 
                 <!-- Numbers of pages -->
                 <th:block th:each="number : ${pagenumbers}">
-                    <a th:attrappend="href=${number!=bookpage.number+1}?@{/(page=${number - 1})}"
+                    <a th:href="${number != page.number+1} ? @{/(page=${number - 1})}"
                        th:text="${number}"
                        class="pagenumber"
-                       th:classappend="${number==bookpage.number+1}?'current'"></a>
+                       th:classappend="${number==page.number+1}?'current'"></a>
                 </th:block>
 
                 <!-- The 'Next page' button -->
-                <a th:href="@{/(page=${bookpage.number + 1})}"
+                <a th:href="${nextPageURL}"
                    class="pagenumber prevnext"
-                   th:classappend="${!bookpage.hasNext()}?'hidden'">
-                    <i class="far fa-arrow-alt-circle-right"></i>
+                   th:classappend="${!page.hasNext()}?'hidden'">
+                        <i class="far fa-arrow-alt-circle-right"></i>
                 </a>
             </td>
         </tr>
+        <!-- Columns names -->
         <tr style="text-align: center; font-size: larger; background-color: lightgray;">
             <td></td>
             <td>ID</td>
@@ -50,7 +53,8 @@
             <td><b>Author</b></td>
             <td><b>Publisher</b></td>
         </tr>
-            <tr th:each="book : ${bookpage.content}">
+            <!-- List of books on the page -->
+            <tr th:each="book : ${books}">
                 <td align="center"><a th:href="@{/editBook(id=${book.id})}" class="edit fas fa-edit"></a></td>
                 <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>
