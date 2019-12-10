@@ -55,7 +55,7 @@
         </tr>
             <!-- List of books on the page -->
             <tr th:each="book : ${books}">
-                <td align="center"><a th:href="@{${urlService.getEditBookURL(book.id)}}" class="edit fas fa-edit"></a></td>
+                <td align="center"><a th:href="@{${urlService.getEditBookButtonURL(book.id)}}" class="edit fas fa-edit"></a></td>
                 <td th:text="${book.id} + '.'" align="right"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.genre}"></td>

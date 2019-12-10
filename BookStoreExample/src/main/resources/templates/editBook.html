@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/editBook.css">
         <title th:text="'Edit book - ' + ${book.title}"></title>
-<!--    <title>Edit book</title>-->
 </head>
 <body>
 <div style="width: 100%" align="center">
-    <form id="editForm" action="#" th:action="@{/saveBook(id=${book.id})}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <form id="editForm" action="#" th:action="@{${urlService.getEditBookFormSubmitActionURL(book.id)}}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
     <table cellpadding="1px" cellspacing="1px" align="center">
         <tbody>
             <tr>
@@ -91,13 +90,13 @@
 
                     <input type="submit" value="Cancel"
                            form="editForm"
-                           th:formaction="@{/}"
+                           th:formaction="@{${urlService.getEditBookFormCancelActionURL()}}"
                            th:formmethod="get"
                            class="action-button" />
 
                     <input type="submit" value="Delete"
                            form="editForm"
-                           th:formaction="@{/deleteBook(id=${book.id})}"
+                           th:formaction="@{${urlService.getEditBookFormDeleteActionURL(book.id)}}"
                            th:formmethod="post"
                            class="action-button" />
                 </td>

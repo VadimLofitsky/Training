@@ -98,6 +98,9 @@ public class BookController {
 
     @GetMapping(Endpoints.EDITBOOK_REQUEST)
     public String editBook(@RequestParam Long id, Model model) {
+
+        model.addAttribute("urlService", urlService);
+
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
 
         model.addAttribute("book", bookService.getBookById(id));
@@ -108,6 +111,7 @@ public class BookController {
 
     @PostMapping(Endpoints.DELETEBOOK_REQUEST)
     public String deleteBook(@RequestParam Long id) {
+
         bookService.deleteBook(id);
 
         return Endpoints.DELETEBOOK_RESPONSE;

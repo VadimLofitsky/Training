@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UrlService {
+
     // at index template
     // Add new book button
     public String getAddNewBookActionURL() {
-        return "/" + Endpoints.ADDNEWBOOK_TEMPLATE;
+        return Endpoints.ADDNEWBOOK_REQUEST;
     }
 
     // 'Prev'- and 'next'-page buttons
@@ -24,19 +25,38 @@ public class UrlService {
     }
 
     // 'Edit book' button
-    public String getEditBookURL(int bookId) {
-        // editBook(id=${book.id})
-        return "/" + Endpoints.EDITBOOK_TEMPLATE + "?id=" + bookId;
+    public String getEditBookButtonURL(int bookId) {
+        return Endpoints.EDITBOOK_REQUEST + "?id=" + bookId;
     }
+
+
 
     // at addNewBook template
     // editing form action URL
-    public String getAddNewBookFormActionURL() {
+    public String getAddNewBookFormSubmitActionURL() {
         return Endpoints.SAVEBOOK_REQUEST + "?id=-1";
     }
 
     // 'Cancel' button form action
     public String getAddNewBookFormCancelActionURL() {
         return Endpoints.ADDNEWBOOK_CANCEL;
+    }
+
+
+
+    // at editBook template
+    // editing form action URL
+    public String getEditBookFormSubmitActionURL(int id) {
+        return Endpoints.SAVEBOOK_REQUEST + "?id=" + id;
+    }
+
+    // 'Cancel' button form action
+    public String getEditBookFormCancelActionURL() {
+        return Endpoints.EDITBOOK_CANCEL;
+    }
+
+    // 'Delete' button form action
+    public String getEditBookFormDeleteActionURL(int id) {
+        return Endpoints.EDITBOOK_DELETE + "?id=" + id;
     }
 }
