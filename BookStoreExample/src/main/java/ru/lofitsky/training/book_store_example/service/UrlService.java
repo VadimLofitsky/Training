@@ -28,4 +28,15 @@ public class UrlService {
         // editBook(id=${book.id})
         return "/" + Endpoints.EDITBOOK_TEMPLATE + "?id=" + bookId;
     }
+
+    // at addNewBook template
+    // editing form action URL
+    public String getAddNewBookFormActionURL() {
+        return Endpoints.SAVEBOOK_REQUEST + "?id=-1";
+    }
+
+    // 'Cancel' button form action
+    public String getAddNewBookFormCancelActionURL() {
+        return Endpoints.ADDNEWBOOK_CANCEL;
+    }
 }

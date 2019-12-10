@@ -61,6 +61,9 @@ public class BookController {
 
     @GetMapping(Endpoints.ADDNEWBOOK_REQUEST)
     public String addNewBook(Model model) {
+
+        model.addAttribute("urlService", urlService);
+
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
