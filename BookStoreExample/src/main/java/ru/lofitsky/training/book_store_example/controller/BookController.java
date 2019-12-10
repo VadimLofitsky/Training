@@ -99,7 +99,7 @@ public class BookController {
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
-        return "/editBook";
+        return "editBook";
     }
 
     @PostMapping("/deleteBook")
