@@ -1,18 +1,24 @@
 package ru.lofitsky.training.book_store_example.service;
 
-public enum Endpoints {
+public class Endpoints {
 
-    ROOT("/", "index"),
-    ADDNEWBOOK("/addNewBook", "addNewBook"),
-    SAVEBOOK("/saveBook", "redirect:/"),
-    EDITBOOK("/editBook", "editBook"),
-    DELETEBOOK("/deleteBook", "redirect:/");
+    public static final String ROOT_REQUEST = "/";
+	public static final String ROOT_RESPONSE = "index";
+	public static final String ROOT_TEMPLATE = "index";
 
-    public final String request;
-    public final String response;
+    public static final String ADDNEWBOOK_REQUEST = "/addNewBook";
+	public static final String ADDNEWBOOK_RESPONSE = "addNewBook";
+	public static final String ADDNEWBOOK_TEMPLATE = "addNewBook";
 
-    Endpoints(String request, String response) {
-        this.request = request;
-        this.response = response;
-    }
+    public static final String SAVEBOOK_REQUEST = "/saveBook";
+	public static final String SAVEBOOK_RESPONSE = "redirect:/";
+	public static final String SAVEBOOK_TEMPLATE = "redirect:/";
+
+    public static final String EDITBOOK_REQUEST = "/editBook";
+	public static final String EDITBOOK_RESPONSE = "editBook";
+	public static final String EDITBOOK_TEMPLATE = "editBook";
+
+    public static final String DELETEBOOK_REQUEST = "/deleteBook";
+	public static final String DELETEBOOK_RESPONSE = "redirect:/";
+	public static final String DELETEBOOK_TEMPLATE = "redirect:/";
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
+import ru.lofitsky.training.book_store_example.service.Endpoints;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/")
+    @GetMapping(Endpoints.ROOT_REQUEST)
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
 
@@ -55,18 +56,18 @@ public class BookController {
         model.addAttribute("prevPageURL", prevPageURL);
         model.addAttribute("nextPageURL", nextPageURL);
 
-        return "index";
+        return Endpoints.ROOT_RESPONSE;
     }
 
-    @GetMapping("/addNewBook")
+    @GetMapping(Endpoints.ADDNEWBOOK_REQUEST)
     public String addNewBook(Model model) {
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
-        return "addNewBook";
+        return Endpoints.ADDNEWBOOK_RESPONSE;
     }
 
-    @PostMapping("/saveBook")
+    @PostMapping(Endpoints.SAVEBOOK_REQUEST)
     public String saveBook(@RequestParam Long id,
                            @RequestParam String title,
                            @RequestParam String genre,
@@ -89,23 +90,23 @@ public class BookController {
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "redirect:/";
+        return Endpoints.SAVEBOOK_RESPONSE;
     }
 
-    @GetMapping("/editBook")
+    @GetMapping(Endpoints.EDITBOOK_REQUEST)
     public String editBook(@RequestParam Long id, Model model) {
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
 
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
-        return "editBook";
+        return Endpoints.EDITBOOK_RESPONSE;
     }
 
-    @PostMapping("/deleteBook")
+    @PostMapping(Endpoints.DELETEBOOK_REQUEST)
     public String deleteBook(@RequestParam Long id) {
         bookService.deleteBook(id);
 
-        return "redirect:/";
+        return Endpoints.DELETEBOOK_RESPONSE;
     }
 }
