@@ -14,6 +14,7 @@ import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
 import ru.lofitsky.training.book_store_example.service.Endpoints;
+import ru.lofitsky.training.book_store_example.service.UrlService;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,9 +28,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private UrlService urlService;
+
     @GetMapping(Endpoints.ROOT_REQUEST)
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
+
+        model.addAttribute("urlService", urlService);
 
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
@@ -49,12 +55,6 @@ public class BookController {
         }
 
         model.addAttribute("pagenumbers", pageNumbers);
-
-        // Generating URLs for 'Prev' and 'Next' buttons
-        String prevPageURL = page.hasPrevious() ? "/?page=" + (pageable.getPageNumber() - 1) : "";
-        String nextPageURL = page.hasNext() ? "/?page=" + (pageable.getPageNumber() + 1) : "";
-        model.addAttribute("prevPageURL", prevPageURL);
-        model.addAttribute("nextPageURL", nextPageURL);
 
         return Endpoints.ROOT_RESPONSE;
     }
