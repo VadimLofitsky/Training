@@ -88,11 +88,10 @@
                     <input type="reset" value="Reset"
                            class="action-button" />
 
-                    <input type="submit" value="Cancel"
-                           form="editForm"
-                           th:formaction="@{${urlService.getEditBookFormCancelActionURL()}}"
-                           th:formmethod="get"
-                           class="action-button" />
+                    <input type="button"
+                           value="Cancel"
+                           th:onclick="'javascript: window.location.href=&quot;' + @{${urlService.getEditBookFormCancelActionURL()}} + '&quot;'"
+                           class="action-button4" />
 
                     <input type="submit" value="Delete"
                            form="editForm"
