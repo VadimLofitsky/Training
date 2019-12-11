@@ -31,7 +31,7 @@ public class BookController {
     @Autowired
     private UrlService urlService;
 
-    @GetMapping(Endpoints.ROOT_REQUEST)
+    @GetMapping(Endpoints.ROOT_MAPPING)
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
 
@@ -56,10 +56,10 @@ public class BookController {
 
         model.addAttribute("pagenumbers", pageNumbers);
 
-        return Endpoints.ROOT_RESPONSE;
+        return Endpoints.ROOT_TEMPLATE;
     }
 
-    @GetMapping(Endpoints.ADDNEWBOOK_REQUEST)
+    @GetMapping(Endpoints.ADDNEWBOOK_MAPPING)
     public String addNewBook(Model model) {
 
         model.addAttribute("urlService", urlService);
@@ -67,10 +67,10 @@ public class BookController {
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
-        return Endpoints.ADDNEWBOOK_RESPONSE;
+        return Endpoints.ADDNEWBOOK_TEMPLATE;
     }
 
-    @PostMapping(Endpoints.SAVEBOOK_REQUEST)
+    @PostMapping(Endpoints.SAVEBOOK_MAPPING)
     public String saveBook(@RequestParam Long id,
                            @RequestParam String title,
                            @RequestParam String genre,
@@ -93,10 +93,10 @@ public class BookController {
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return Endpoints.SAVEBOOK_RESPONSE;
+        return Endpoints.SAVEBOOK_TEMPLATE;
     }
 
-    @GetMapping(Endpoints.EDITBOOK_REQUEST)
+    @GetMapping(Endpoints.EDITBOOK_MAPPING)
     public String editBook(@RequestParam Long id, Model model) {
 
         model.addAttribute("urlService", urlService);
@@ -106,14 +106,14 @@ public class BookController {
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
-        return Endpoints.EDITBOOK_RESPONSE;
+        return Endpoints.EDITBOOK_TEMPLATE;
     }
 
-    @PostMapping(Endpoints.DELETEBOOK_REQUEST)
+    @PostMapping(Endpoints.DELETEBOOK_MAPPING)
     public String deleteBook(@RequestParam Long id) {
 
         bookService.deleteBook(id);
 
-        return Endpoints.DELETEBOOK_RESPONSE;
+        return Endpoints.DELETEBOOK_TEMPLATE;
     }
 }

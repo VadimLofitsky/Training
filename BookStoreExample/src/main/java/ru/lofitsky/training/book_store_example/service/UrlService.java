@@ -8,7 +8,7 @@ public class UrlService {
     // at index template
     // Add new book button
     public String getAddNewBookActionURL() {
-        return Endpoints.ADDNEWBOOK_REQUEST;
+        return Endpoints.ADDNEWBOOK_MAPPING;
     }
 
     // 'Prev'- and 'next'-page buttons
@@ -26,7 +26,7 @@ public class UrlService {
 
     // 'Edit book' button
     public String getEditBookButtonURL(int bookId) {
-        return Endpoints.EDITBOOK_REQUEST + "?id=" + bookId;
+        return Endpoints.EDITBOOK_MAPPING + "?id=" + bookId;
     }
 
 
@@ -34,7 +34,7 @@ public class UrlService {
     // at addNewBook template
     // editing form action URL
     public String getAddNewBookFormSubmitActionURL() {
-        return Endpoints.SAVEBOOK_REQUEST + "?id=-1";
+        return Endpoints.SAVEBOOK_MAPPING + "?id=-1";
     }
 
     // 'Cancel' button form action
@@ -47,7 +47,7 @@ public class UrlService {
     // at editBook template
     // editing form action URL
     public String getEditBookFormSubmitActionURL(int id) {
-        return Endpoints.SAVEBOOK_REQUEST + "?id=" + id;
+        return Endpoints.SAVEBOOK_MAPPING + "?id=" + id;
     }
 
     // 'Cancel' button form action
