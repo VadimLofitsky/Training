@@ -93,7 +93,7 @@ public class BookController {
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return Endpoints.SAVEBOOK_TEMPLATE;
+        return Endpoints.SAVEBOOK_REDIRECT;
     }
 
     @GetMapping(Endpoints.EDITBOOK_MAPPING)
@@ -114,6 +114,6 @@ public class BookController {
 
         bookService.deleteBook(id);
 
-        return Endpoints.DELETEBOOK_TEMPLATE;
+        return Endpoints.DELETEBOOK_REDIRECT;
     }
 }

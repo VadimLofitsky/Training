@@ -10,7 +10,7 @@ public class Endpoints {
     public static final String ADDNEWBOOK_CANCEL = "/";
 
     public static final String SAVEBOOK_MAPPING = "/saveBook";
-	public static final String SAVEBOOK_TEMPLATE = "redirect:/";
+	public static final String SAVEBOOK_REDIRECT = "redirect:/";
 
     public static final String EDITBOOK_MAPPING = "/editBook";
 	public static final String EDITBOOK_TEMPLATE = "editBook";
@@ -18,5 +18,5 @@ public class Endpoints {
     public static final String EDITBOOK_DELETE = "/deleteBook";
 
     public static final String DELETEBOOK_MAPPING = "/deleteBook";
-	public static final String DELETEBOOK_TEMPLATE = "redirect:/";
+	public static final String DELETEBOOK_REDIRECT = "redirect:/";
 }
