@@ -1,4 +1,5 @@
-input.action-button {
-    width: 20%;
-    margin: 1% 0 1% 0;
+input.action-button4 {
+    width: auto;
+    min-width: 20%;
+    margin: 0 1% 0 1%;
 }

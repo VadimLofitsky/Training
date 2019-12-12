@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.lofitsky.training.book_store_example.model.Book;
 import ru.lofitsky.training.book_store_example.model.Genres;
 import ru.lofitsky.training.book_store_example.service.BookService;
+import ru.lofitsky.training.book_store_example.service.Endpoints;
+import ru.lofitsky.training.book_store_example.service.UrlService;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,9 +28,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/")
+    @Autowired
+    private UrlService urlService;
+
+    @GetMapping(Endpoints.ROOT_MAPPING)
     public String index(Model model,
            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
+
+        model.addAttribute("urlService", urlService);
 
         Page<Book> page = bookService.getAllBooks(pageable);
         model.addAttribute("page", page);
@@ -49,24 +56,21 @@ public class BookController {
 
         model.addAttribute("pagenumbers", pageNumbers);
 
-        // Generating URLs for 'Prev' and 'Next' buttons
-        String prevPageURL = page.hasPrevious() ? "/?page=" + (pageable.getPageNumber() - 1) : "";
-        String nextPageURL = page.hasNext() ? "/?page=" + (pageable.getPageNumber() + 1) : "";
-        model.addAttribute("prevPageURL", prevPageURL);
-        model.addAttribute("nextPageURL", nextPageURL);
-
-        return "index";
+        return Endpoints.ROOT_TEMPLATE;
     }
 
-    @GetMapping("/addNewBook")
+    @GetMapping(Endpoints.ADDNEWBOOK_MAPPING)
     public String addNewBook(Model model) {
+
+        model.addAttribute("urlService", urlService);
+
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
         model.addAttribute("genres", genres);
 
-        return "addNewBook";
+        return Endpoints.ADDNEWBOOK_TEMPLATE;
     }
 
-    @PostMapping("/saveBook")
+    @PostMapping(Endpoints.SAVEBOOK_MAPPING)
     public String saveBook(@RequestParam Long id,
                            @RequestParam String title,
                            @RequestParam String genre,
@@ -89,23 +93,27 @@ public class BookController {
 
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "redirect:/";
+        return Endpoints.SAVEBOOK_REDIRECT;
     }
 
-    @GetMapping("/editBook")
+    @GetMapping(Endpoints.EDITBOOK_MAPPING)
     public String editBook(@RequestParam Long id, Model model) {
+
+        model.addAttribute("urlService", urlService);
+
         List<Genres> genres = Stream.of(Genres.values()).collect(Collectors.toList());
 
         model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("genres", genres);
 
-        return "/editBook";
+        return Endpoints.EDITBOOK_TEMPLATE;
     }
 
-    @PostMapping("/deleteBook")
+    @PostMapping(Endpoints.DELETEBOOK_MAPPING)
     public String deleteBook(@RequestParam Long id) {
+
         bookService.deleteBook(id);
 
-        return "redirect:/";
+        return Endpoints.DELETEBOOK_REDIRECT;
     }
 }

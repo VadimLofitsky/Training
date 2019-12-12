@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/editBook.css">
         <title th:text="'Edit book - ' + ${book.title}"></title>
-<!--    <title>Edit book</title>-->
 </head>
 <body>
 <div style="width: 100%" align="center">
-    <form id="editForm" action="#" th:action="@{/saveBook(id=${book.id})}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <form id="editForm" action="#" th:action="@{${urlService.getEditBookFormSubmitActionURL(book.id)}}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
     <table cellpadding="1px" cellspacing="1px" align="center">
         <tbody>
             <tr>
-                <td colspan="3" align="center"><h2>Edit book</h2></td>
+                <td colspan="2" align="center"><h2>Edit book</h2></td>
             </tr>
             <tr>
                 <td>
@@ -82,24 +81,23 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="6" align="center">
+                <td colspan="2" align="center">
                     <input type="submit" value="Save"
-                           class="action-button" />
+                           class="action-button4" />
 
                     <input type="reset" value="Reset"
-                           class="action-button" />
+                           class="action-button4" />
 
-                    <input type="submit" value="Cancel"
-                           form="editForm"
-                           th:formaction="@{/}"
-                           th:formmethod="get"
-                           class="action-button" />
+                    <input type="button"
+                           value="Cancel"
+                           th:onclick="'javascript: window.location.href=&quot;' + @{${urlService.getEditBookFormCancelActionURL()}} + '&quot;'"
+                           class="action-button4" />
 
                     <input type="submit" value="Delete"
                            form="editForm"
-                           th:formaction="@{/deleteBook(id=${book.id})}"
+                           th:formaction="@{${urlService.getEditBookFormDeleteActionURL(book.id)}}"
                            th:formmethod="post"
-                           class="action-button" />
+                           class="action-button4" />
                 </td>
             </tr>
             <tr>
