@@ -19,7 +19,6 @@ services:
       - POSTGRES_PORT=5432
     build:
       context: .
-      dockerfile: web-app.Dockerfile
     depends_on:
       - book-store-db
     ports:
