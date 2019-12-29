@@ -1,3 +1,4 @@
 /BookStoreExample.iml
 /.idea/
 /target/
+/docker-compose/book-store-example-1.0-SNAPSHOT.jar

@@ -6,9 +6,10 @@
     <groupId>ru.lofitsky.training</groupId>
     <artifactId>book-store-example</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
-        <java.version>12.0.2</java.version>
+        <java.version>1.8</java.version>
         <postgres.version>42.2.8</postgres.version>
         <h2database.version>1.4.200</h2database.version>
         <lombok.version>1.18.10</lombok.version>
