@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stored books</title>
+
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="booktablecontainer">
+    <table id="booktable" cellpadding="1px" cellspacing="1px" border="1px">
+        <tbody>
+        <tr>
+            <!-- Head of the table... -->
+            <td colspan="6" align="center"><h2><i class="fas fa-book-open"></i>&nbsp;Stored books</h2>
+                <!-- ...and the button for creating new book -->
+                <br><a th:href="@{${urlService.getAddNewBookActionURL()}}" alt="Add new book..."><i class="fas fa-book-medical fa-2x"></i></a>
+                <br><br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align: center;">
+                <!-- The 'Previous page' button -->
+                <a th:href="@{${urlService.getPrevPageURL(page.hasPrevious(), page.number)}}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!page.hasPrevious()}?'hidden'">
+                        <i class="far fa-arrow-alt-circle-left"></i>
+                </a>
+
+                <!-- Numbers of pages -->
+                <th:block th:each="number : ${pagenumbers}">
+                    <a th:href="@{${urlService.getUrlForPage(number, page.number)}}"
+                       th:text="${number}"
+                       class="pagenumber"
+                       th:classappend="${number==page.number+1}?'current'"></a>
+                </th:block>
+
+                <!-- The 'Next page' button -->
+                <a th:href="@{${urlService.getNextPageURL(page.hasNext(), page.number)}}"
+                   class="pagenumber prevnext"
+                   th:classappend="${!page.hasNext()}?'hidden'">
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
+            </td>
+        </tr>
+        <!-- Columns names -->
+        <tr style="text-align: center; font-size: larger; background-color: lightgray;">
+            <td></td>
+            <td>ID</td>
+            <td><b>Title</b></td>
+            <td><b>Genre</b></td>
+            <td><b>Author</b></td>
+            <td><b>Publisher</b></td>
+        </tr>
+            <!-- List of books on the page -->
+            <tr th:each="book : ${books}">
+                <td align="center"><a th:href="@{${urlService.getEditBookButtonURL(book.id)}}" class="edit fas fa-edit"></a></td>
+                <td th:text="${book.id} + '.'" align="right"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.genre}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

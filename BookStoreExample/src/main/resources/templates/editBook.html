@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/editBook.css">
+        <title th:text="'Edit book - ' + ${book.title}"></title>
+</head>
+<body>
+<div style="width: 100%" align="center">
+    <form id="editForm" action="#" th:action="@{${urlService.getEditBookFormSubmitActionURL(book.id)}}" method="post" style="border: solid thin black; width: fit-content; align-self: center; padding: 0 75px 0 75px;">
+    <table cellpadding="1px" cellspacing="1px" align="center">
+        <tbody>
+            <tr>
+                <td colspan="2" align="center"><h2>Edit book</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ID:&nbsp;</label>
+                </td>
+                <td align="left">
+                    <input type="text"
+                           id="id"
+                           th:name="id"
+                           th:value="${book.id}" style="visibility: hidden; width: 0;">
+                    <span th:text="${book.id}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="title">Title:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text"
+                           id="title"
+                           th:name="title"
+                           th:value="${book.title}"
+                           placeholder="book title"
+                           style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="genre">Genre:&nbsp;</label>
+                </td>
+                <td>
+                    <select th:object="${genres}" id="genre" th:name="genre">
+                        <option th:each="genre : ${genres}"
+                                th:text="${genre}"
+                                th:value="${genre}"
+                        th:selected="${genre==book.genre}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="author">Author:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text"
+                           id="author"
+                           th:name="author"
+                           th:value="${book.author}"
+                           placeholder="author"
+                           style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="publisher">Publisher:&nbsp;</label>
+                </td>
+                <td>
+                    <input type="text"
+                           id="publisher"
+                           th:name="publisher"
+                           th:value="${book.publisher}"
+                           placeholder="publisher"
+                           style="width: 100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save"
+                           class="action-button4" />
+
+                    <input type="reset" value="Reset"
+                           class="action-button4" />
+
+                    <input type="button"
+                           value="Cancel"
+                           th:onclick="'javascript: window.location.href=&quot;' + @{${urlService.getEditBookFormCancelActionURL()}} + '&quot;'"
+                           class="action-button4" />
+
+                    <input type="submit" value="Delete"
+                           form="editForm"
+                           th:formaction="@{${urlService.getEditBookFormDeleteActionURL(book.id)}}"
+                           th:formmethod="post"
+                           class="action-button4" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+</body>
+</html>
