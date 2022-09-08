@@ -10,7 +10,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <postgres.version>42.2.8</postgres.version>
+        <postgres.version>42.4.1</postgres.version>
         <h2database.version>1.4.200</h2database.version>
         <lombok.version>1.18.10</lombok.version>
     </properties>
